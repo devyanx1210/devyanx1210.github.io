@@ -27,19 +27,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4. Build the React app (this compiles .jsx → .js)
+      # 4. Build the React app
       - name: Build React (Vite) app
         run: npm run build
 
-      # 5. Upload dist/ folder to GitHub Pages
+      # 5. Upload dist/ folder
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages   # ✅ MUST match environment created in your repo
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
