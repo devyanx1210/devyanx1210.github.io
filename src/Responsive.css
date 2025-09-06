@@ -1,0 +1,26 @@
+/* Desktop */
+@media screen and (min-width: 1025px) {
+  /* Desktop layout */
+  /* Optional: height-based adjustments */
+  /* Example: min-height: 800px; */
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet layout */
+  /* Optional: height-based adjustments */
+  /* Example: min-height: 600px; */
+}
+
+/* Phone */
+@media screen and (max-width: 767px) {
+  .profile-container img {
+    opacity: 0.3;
+  }
+  .skills-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    cursor: pointer;
+  }
+}
