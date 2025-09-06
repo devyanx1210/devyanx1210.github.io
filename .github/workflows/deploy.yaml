@@ -2,7 +2,7 @@ name: Deploy React (Vite) site to Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: ["master"] # or "main" if your default branch is main
 
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # 4. Build the React app
+      # 4. Build the React (Vite) app
       - name: Build React (Vite) app
         run: npm run build
 
@@ -41,7 +41,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: github-pages   # ✅ MUST match environment created in your repo
+      name: github-pages
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
