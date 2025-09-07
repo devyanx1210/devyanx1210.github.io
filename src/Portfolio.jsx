@@ -17,7 +17,7 @@ import {
 import { SiTailwindcss, SiHtml5, SiCss3, SiJavascript } from "react-icons/si";
 import FadeInSection from "./FadeInSection";
 
-export default function Homepage() {
+export default function Portfolio() {
   const projectsData = [
     {
       name: "RoboTilapia App",
@@ -187,10 +187,12 @@ export default function Homepage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.8 }}
           >
-            I’m a self-taught frontend developer and a 4th-year Computer
-            Engineering student. I turn ideas into responsive, meaningful web
-            experiences. I let my work speak for itself, crafted with care,
-            curiosity, and purpose.
+            I’m Noel Christian L. Soberano, a self-taught web developer and
+            a 4th-year Computer Engineering student. I transform ideas into
+            responsive and engaging web experiences, crafting projects with
+            care, curiosity, and purpose. I let my work speak for itself while
+            continuously learning and pushing the boundaries of what web
+            development can achieve.
           </motion.p>
 
           <motion.div
@@ -248,9 +250,7 @@ export default function Homepage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            onClick={() =>
-              window.open("/certificates/javascript.pdf", "_blank")
-            }
+            onClick={() => window.open("/certifications.pdf", "_blank")}
             style={{
               cursor: "pointer",
               color: "#9747ff",

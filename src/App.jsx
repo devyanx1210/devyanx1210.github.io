@@ -2,16 +2,16 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import Homepage from "./Homepage.jsx";
 import Projects from "./Projects.jsx";
-import "./Responsive.css"
+import "./Responsive.css";
+import Portfolio from "./Portfolio.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Homepage />
+      <Portfolio />
     </>
   );
 }
