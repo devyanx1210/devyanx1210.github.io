@@ -2,7 +2,7 @@ name: Deploy React (Vite) site to Pages
 
 on:
   push:
-    branches: ["master"] # or "main" if your default branch is main
+    branches: ["master"] # or "main"
 
 permissions:
   contents: read
@@ -13,25 +13,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 1. Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Setup Node
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4. Build the React (Vite) app
       - name: Build React (Vite) app
         run: npm run build
 
-      # 5. Upload dist/ folder
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
         with:
