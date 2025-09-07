@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
+  base: "/devyanx1210.github.io/",
   plugins: [react()],
   server: {
     host: "localhost", // or "0.0.0.0" if you want access from other devices
