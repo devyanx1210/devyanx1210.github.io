@@ -13,7 +13,6 @@ html,
 body {
   display: flex;
   flex-direction: column;
-  height: 346vh;
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal scroll */
   font-family: "Poppins", sans-serif;
@@ -29,42 +28,19 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 /* Homepage-----------------------------------------*/
 #homepage {
-  min-height: 100vh;
+  min-height: 700px;
+  max-height: 1200px;
+
   background-color: #070708;
   display: flex;
   justify-content: flex-end; /* align content to the right */
   align-items: center; /* vertically center */
   padding-right: 5vw; /* optional spacing from the right edge */
-  overflow-x: hidden;
-}
-
-.top-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end; /* align items to the right */
-  align-items: center; /* vertically center items */
-  gap: 4vw; /* space between items */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 10vh;
-  background-color: rgba(255, 255, 255, 0);
-  z-index: 20;
-  padding: 0 2vw; /* optional padding from edges */
-}
-
-.top-bar a {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.3vw;
-  font-weight: 400;
-  color: rgb(255, 255, 255);
-  margin: 0; /* remove default margin */
-  cursor: pointer;
 }
 
 .overlay-purple {
@@ -170,10 +146,11 @@ button:hover {
 /* My Projects -------------------------------- */
 /* Projects.css */
 #projects {
-  display: flex;
+  display: grid;
   flex-direction: column;
   gap: 1.5rem;
-  height: 100vh;
+  min-height: 700px;
+  max-height: 1200px;
   width: 100%;
   background-color: #070708;
   color: #fff;
@@ -206,12 +183,14 @@ button:hover {
 }
 
 .projects-slider {
-  height: 85vh;
+  min-height: 700px;
+  max-height: 100px;
   width: 100vw;
   display: flex;
   gap: 1rem;
   overflow-x: hidden;
   cursor: grab;
+  overflow: hidden;
 }
 
 .projects-slider:active {
@@ -257,7 +236,7 @@ button:hover {
 }
 
 #skills {
-  height: 40vh;
+  min-height: 200px;
   margin: 20px 0;
   text-align: center;
   display: flex;
@@ -316,14 +295,15 @@ button:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh;
+  height: clamp(600px, 100vh, 700px);
+
   overflow: hidden;
   padding: 2rem 0;
 }
 
 .contactme-img {
   position: absolute;
-  width: clamp(450px, 35vw, 500px);
+  width: clamp(400px, 35vw,550px);
   bottom: 0;
   z-index: 10;
   margin: 0 2rem;
@@ -335,7 +315,7 @@ button:hover {
   left: 50%;
   transform: translateX(-50%);
   width: 70vw;
-  height: 40vw;
+  height: clamp(500px,40vh,700px);
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -369,7 +349,7 @@ button:hover {
 }
 
 .contact-links a {
-  font-size: clamp(40px, 4vw, 100px);
+  font-size: 5vw;
   color: #8120d3;
   transition: transform 0.3s, color 0.3s;
 }
@@ -389,15 +369,67 @@ button:hover {
   align-items: flex-start;
 }
 
+/* Tooltip base */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: white;
+  font-size: clamp(1.5rem, 2vw, 2rem); /* responsive icon size */
+  margin: clamp(0.5rem, 1vw, 1rem);
+  transition: transform 0.2s ease;
+}
+
+.tooltip:hover {
+  transform: scale(1.2); /* zoom effect */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  max-width: clamp(120px, 20vw, 200px); /* responsive width */
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: clamp(4px, 0.8vw, 8px) clamp(6px, 1vw, 12px); /* responsive padding */
+  border-radius: 6px;
+  font-size: clamp(0.7rem, 1.2vw, 0.8rem); /* responsive text */
+  white-space: normal; /* allow wrapping */
+  word-break: break-word; /* break long emails gracefully */
+
+  position: absolute;
+  bottom: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+/* Show on hover */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* Show on click (React adds .active) */
+.tooltip.active .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .contact-links a {
     font-size: 2.5rem;
   }
 
-  .contactme-img {
-    width: 17rem;
-  }
+
 }
 
 @media (max-width: 768px) {
@@ -423,24 +455,10 @@ button:hover {
     align-items: center;
   }
 
-  .contact-links a {
-    font-size: 2rem;
-  }
-
-  .contactme-img {
-    width: 14rem;
-    margin: 0;
-  }
 }
 
 @media (max-width: 480px) {
-  .contact-links a {
-    font-size: 1.5rem;
-  }
-
-  .contactme-img {
-    width: 15rem;
-  }
+  
 
   .contacts-container {
     gap: 1rem;
