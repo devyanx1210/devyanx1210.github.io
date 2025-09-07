@@ -1,9 +1,8 @@
-// vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  base: "/devyanx1210.github.io/",
+  base: "/", // root for user page
   plugins: [react()],
   server: {
     watch: {
