@@ -18,7 +18,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-family: "Inter", sans-serif;
   color: #ebebeb; /* Light gray text */
-  background-color: #070708;
+  background-color: #0c0b14;
   line-height: 1.6;
 }
 
@@ -36,7 +36,7 @@ body {
   min-height: 700px;
   max-height: 1200px;
 
-  background-color: #070708;
+  background-color: #0c0b14;
   display: flex;
   justify-content: flex-end; /* align content to the right */
   align-items: center; /* vertically center */
@@ -84,7 +84,7 @@ body {
   left: 0;
   width: 100%;
   height: 20%; /* adjust fade height */
-  background: linear-gradient(to top, #070708, rgba(7, 7, 8, 0));
+  background: linear-gradient(to top, #0c0b14, rgba(12, 11, 20, 0));
   pointer-events: none;
   z-index: 10;
 }
@@ -144,17 +144,13 @@ button:hover {
 }
 
 /* My Projects -------------------------------- */
-/* Projects.css */
 #projects {
-  display: grid;
+  display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  min-height: 700px;
-  max-height: 1200px;
   width: 100%;
-  background-color: #070708;
   color: #fff;
-  overflow: hidden;
+  padding-bottom: 4rem;
 }
 
 .projects-header {
@@ -163,12 +159,12 @@ button:hover {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+  padding: 3rem 5% 1rem;
 }
 
 .projects-header h1 {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: bold;
-  margin-left: 3%;
 }
 
 .projects-header a {
@@ -179,112 +175,171 @@ button:hover {
   color: #9747ff;
   text-decoration: none;
   font-weight: 500;
-  margin-right: 3%;
 }
 
-.projects-slider {
-  min-height: 700px;
-  max-height: 100px;
-  width: 100vw;
-  display: flex;
-  gap: 1rem;
-  overflow-x: hidden;
-  cursor: grab;
-  overflow: hidden;
-}
-
-.projects-slider:active {
-  cursor: grabbing;
-}
-
-.project-card {
-  margin-top: 1%;
-  margin-bottom: 1%;
-  max-width: clamp(400px, 50vw, 600px);
-  height: clamp(400px, 50vw, 540px);
-  background-color: #1a1a1a;
-  border-radius: 12px;
-  padding: 1rem;
+.projects-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  text-align: center;
-  flex-shrink: 0;
-  box-shadow: 0px 4px 15px rgba(151, 71, 255, 0.4);
-  transition: transform 0.3s ease;
+  gap: 2.5rem;
+  padding: 0 5%;
 }
 
-.project-card img {
+.project-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(151, 71, 255, 0.15);
+  background: #13121e;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-row:hover {
+  border-color: rgba(151, 71, 255, 0.45);
+  box-shadow: 0 8px 40px rgba(151, 71, 255, 0.12);
+}
+
+.project-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.project-row-image {
+  flex: 1.2;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.project-row-image img {
   width: 100%;
-  height: clamp(150px, 20vw, 350px);
+  height: 100%;
+  min-height: 300px;
   object-fit: cover;
-  border-radius: 10px;
+  display: block;
+  transition: transform 0.5s ease;
 }
 
-.project-card h2 {
-  font-size: clamp(1rem, 1.5vw, 1.5rem);
+.project-row:hover .project-row-image img {
+  transform: scale(1.04);
+}
+
+.project-row-info {
+  flex: 1;
+  padding: 2.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-row-info h2 {
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
   color: #9747ff;
+  font-weight: 700;
 }
 
-.project-card p {
-  font-size: clamp(0.8rem, 1.2vw, 1rem);
-  color: #ebebeb;
-  line-height: 1.6;
-  text-align: justify;
-  margin-left: 5%;
-  margin-right: 5%;
+.project-row-info p {
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  color: #b8b0cc;
+  line-height: 1.75;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(151, 71, 255, 0.12);
+  color: #c9a7ff;
+  border: 1px solid rgba(151, 71, 255, 0.3);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 #skills {
-  min-height: 200px;
-  margin: 20px 0;
+  padding: 5rem 5%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .skills-title {
-  display: flex;
-  flex-direction: row;
-  font-size: clamp(40px, 3.5vw, 60px);
-  font-weight: bold;
-  margin-bottom: 16px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #ebebeb;
   margin: 0;
 }
-.skills-title h1 {
-  font-size: 5vw;
-  color: #4b0082;
-}
+
 #skills h2 {
-  font-size: clamp(13px, 1vw, 20px) !important;
-  margin-bottom: 3%;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem) !important;
+  margin: 0;
 }
 
 .skills-container {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  justify-items: center;
+  width: 100%;
+  max-width: 700px;
 }
 
 .icon-box {
-  width: clamp(120px, 9vw, 200px);
-  height: clamp(120px, 9vw, 200px);
+  width: clamp(100px, 10vw, 150px);
+  height: clamp(100px, 10vw, 150px);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px; /* rounded square */
-  background: linear-gradient(135deg, #9747ff, #c9a7ff);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6b2dd9, #9747ff);
   color: white;
-  font-size: clamp(50px, 7vw, 200px);
+  font-size: clamp(44px, 5.5vw, 80px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .icon-box:hover {
   transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(151, 71, 255, 0.4);
+  box-shadow: 0 8px 28px rgba(151, 71, 255, 0.45);
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.skill-item span {
+  font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+  color: #c9a7ff;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.project-card-link {
+  display: inline-block;
+  margin-top: auto;
+  padding: 0.4rem 1rem;
+  border: 1px solid #9747ff;
+  border-radius: 6px;
+  color: #9747ff;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.project-card-link:hover {
+  background: #9747ff;
+  color: #fff;
 }
 
 /* contact me-------------------------------------- */
@@ -295,18 +350,16 @@ button:hover {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: clamp(600px, 100vh, 700px);
-
-  overflow: hidden;
-  padding: 2rem 0;
+  height: clamp(580px, 72vh, 760px);
+  overflow: visible;
 }
 
 .contactme-img {
   position: absolute;
-  width: clamp(400px, 35vw,550px);
-  bottom: 0;
+  width: clamp(420px, 55vw, 720px);
+  height: auto;
+  bottom: -20px;
   z-index: 10;
-  margin: 0 2rem;
 }
 
 .overlay-purple-bottom {
@@ -328,60 +381,70 @@ button:hover {
   z-index: 1;
 }
 
-.contacts-container {
+/* Arc of contact icons -------------------------------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-16px); }
+}
+
+.arc-contacts {
+  --r: 200px;
   position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1000px;
+  bottom: 40%;
+  left: 50%;
+  width: 0;
+  height: 0;
   z-index: 20;
-  padding: 0 2rem;
 }
 
-.contact-links {
+.arc-icon {
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  transform:
+    rotate(var(--angle))
+    translateY(calc(var(--r) * -1))
+    rotate(calc(var(--angle) * -1));
+}
+
+.arc-float {
+  animation: float 3.2s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.arc-link {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.contact-links a {
-  font-size: 5vw;
-  color: #8120d3;
-  transition: transform 0.3s, color 0.3s;
-}
-
-.contact-links a:hover {
-  transform: scale(1.2);
-  color: #6b2dd9;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: #c9a7ff;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
-/* Left / Right positioning */
-.left-links {
-  align-items: flex-end;
-}
-
-.right-links {
-  align-items: flex-start;
+.arc-link:hover {
+  background: transparent;
+  color: #fff;
+  box-shadow: none;
+  filter: drop-shadow(0 0 14px rgba(151, 71, 255, 0.8));
 }
 
 /* Tooltip base */
 .tooltip {
   position: relative;
-  display: inline-block;
-  cursor: pointer;
-  color: white;
-  font-size: clamp(1.5rem, 2vw, 2rem); /* responsive icon size */
-  margin: clamp(0.5rem, 1vw, 1rem);
-  transition: transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tooltip:hover {
-  transform: scale(1.2); /* zoom effect */
+  /* scale handled by arc-link */
 }
 
 /* Tooltip text */
@@ -423,82 +486,11 @@ button:hover {
   transform: translateX(-50%) translateY(-4px);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .contact-links a {
-    font-size: 2.5rem;
-  }
-
-
-}
-
-@media (max-width: 768px) {
-  #contact-me {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .contacts-container {
-    flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-
-  .contact-links {
-    flex-direction: row;
-    gap: 1rem;
-  }
-
-  .left-links,
-  .right-links {
-    align-items: center;
-  }
-
-}
-
-@media (max-width: 480px) {
-  
-
-  .contacts-container {
-    gap: 1rem;
-  }
-}
 #homepage,
 #projects,
 #skills,
 #contact-me {
-  min-height: 100vh;
   width: 100%;
   position: relative;
   overflow-x: hidden;
-}
-
-#homepage {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding-right: 5vw;
-}
-
-#projects {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  color: #fff;
-}
-
-#skills {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-#contact-me {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import profile from "./assets/profile.png";
 import contactme from "./assets/contactme.png";
 import RoboTilapia from "./assets/RoboTilapia.png";
@@ -14,7 +14,15 @@ import {
   FaGithub,
   FaFolder,
 } from "react-icons/fa";
-import { SiTailwindcss, SiHtml5, SiCss3, SiJavascript } from "react-icons/si";
+import {
+  SiTailwindcss,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiNodedotjs,
+  SiFirebase,
+  SiMysql,
+} from "react-icons/si";
 import FadeInSection from "./FadeInSection";
 
 export default function Portfolio() {
@@ -23,19 +31,25 @@ export default function Portfolio() {
       name: "RoboTilapia App",
       image: RoboTilapia,
       description:
-        "RoboTilapia is a responsive React and Firebase app that helps farmers monitor water parameters like pH, temperature, ammonia, and dissolved oxygen in real-time, receive alerts, analyze trends, and manage feed and feeding schedules efficiently.",
+        "A responsive aquaculture monitoring app that helps farmers track water parameters like pH, temperature, ammonia, and dissolved oxygen in real-time, receive alerts, analyze trends, and manage feed schedules efficiently.",
+      tags: ["React", "Firebase", "IoT"],
+      github: "https://github.com/devyanx1210",
     },
     {
-      name: "Kudo App",
+      name: "Kudo Fitness App",
       image: KudoApp,
       description:
-        "KDO Fitness is a gym management app that simplifies subscription and attendance tracking. Members can pay online, log attendance, and view their status with real-time alerts. Admins can track payments, attendance, and subscriptions easily. The app is built with React, Node.js, MySQL, and Tailwind CSS.",
+        "A gym management system that simplifies subscription and attendance tracking. Members can pay online, log attendance, and view their status with real-time alerts. Admins get a full dashboard for payments and subscriptions.",
+      tags: ["React", "Node.js", "MySQL", "Tailwind CSS"],
+      github: "https://github.com/devyanx1210",
     },
     {
       name: "Monitree App",
       image: MonitreeApp,
       description:
-        "Monitree is an app for expense enthusiasts to manage their personal expenses effectively. It helps users keep track of their spending in different categories. The app features a user-friendly design for easy navigation. Monitree is built with React for a smooth and responsive experience.",
+        "A personal expense tracker that helps users manage spending across categories with a clean, intuitive interface. Built for speed and simplicity so budgeting feels effortless.",
+      tags: ["React", "CSS"],
+      github: "https://github.com/devyanx1210",
     },
   ];
 
@@ -49,7 +63,7 @@ export default function Portfolio() {
 
   // Copy Email
   const [copied, setCopied] = useState(false);
-  const email = "yourname@example.com";
+  const email = "csoberano1210@gmail.com";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email).then(() => {
@@ -58,46 +72,6 @@ export default function Portfolio() {
     });
   };
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-
-  // Automatic infinite scroll
-  useEffect(() => {
-    let req;
-    const scrollContainer = scrollRef.current;
-    const speed = 0.5; // px per frame
-
-    const animate = () => {
-      if (!isDragging) {
-        if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-          scrollContainer.scrollLeft = 0;
-        } else {
-          scrollContainer.scrollLeft += speed;
-        }
-      }
-      req = requestAnimationFrame(animate);
-    };
-    req = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(req);
-  }, [isDragging]);
-
-  // Dragging handlers
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - scrollRef.current.offsetLeft);
-    setScrollLeft(scrollRef.current.scrollLeft);
-  };
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // scroll-fast
-    scrollRef.current.scrollLeft = scrollLeft - walk;
-  };
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => setIsDragging(false);
 
   // Optional state if you want click toggle
   const [activeTooltip, setActiveTooltip] = useState(null);
@@ -179,7 +153,7 @@ export default function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            A CpE student
+            Full-Stack Developer
           </motion.h1>
 
           <motion.p
@@ -220,21 +194,38 @@ export default function Portfolio() {
             </a>
           </div>
 
-          <div
-            className="projects-slider"
-            ref={scrollRef}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
-          >
-            {/* Duplicate items for seamless infinite scroll */}
-            {[...projectsData, ...projectsData].map((proj, index) => (
-              <div key={index} className="project-card">
-                <img src={proj.image} alt={proj.name} />
-                <h2>{proj.name}</h2>
-                <p>{proj.description}</p>
-              </div>
+          <div className="projects-list">
+            {projectsData.map((proj, index) => (
+              <motion.div
+                key={index}
+                className={`project-row ${index % 2 === 1 ? "reverse" : ""}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <div className="project-row-image">
+                  <img src={proj.image} alt={proj.name} />
+                </div>
+                <div className="project-row-info">
+                  <h2>{proj.name}</h2>
+                  <p>{proj.description}</p>
+                  <div className="project-tags">
+                    {proj.tags.map((tag, i) => (
+                      <span key={i} className="project-tag">{tag}</span>
+                    ))}
+                  </div>
+                  <a
+                    href={proj.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-card-link"
+                  >
+                    <FaGithub style={{ marginRight: "0.4rem" }} />
+                    View Code
+                  </a>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -269,25 +260,35 @@ export default function Portfolio() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={{
-              visible: { transition: { staggerChildren: 0.3 } },
+              visible: { transition: { staggerChildren: 0.2 } },
               hidden: {},
             }}
           >
-            {[FaReact, SiTailwindcss, SiHtml5, SiCss3, SiJavascript].map(
-              (Icon, index) => (
-                <motion.div
-                  key={index}
-                  className="icon-box"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  transition={{ duration: 0.6 }}
-                >
+            {[
+              { Icon: FaReact, label: "React" },
+              { Icon: SiJavascript, label: "JavaScript" },
+              { Icon: SiNodedotjs, label: "Node.js" },
+              { Icon: SiMysql, label: "MySQL" },
+              { Icon: SiFirebase, label: "Firebase" },
+              { Icon: SiTailwindcss, label: "Tailwind CSS" },
+              { Icon: SiHtml5, label: "HTML5" },
+              { Icon: SiCss3, label: "CSS3" },
+            ].map(({ Icon, label }, index) => (
+              <motion.div
+                key={index}
+                className="skill-item"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="icon-box">
                   <Icon />
-                </motion.div>
-              )
-            )}
+                </div>
+                <span>{label}</span>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </FadeInSection>
@@ -298,72 +299,78 @@ export default function Portfolio() {
           <img className="contactme-img" src={contactme} alt="Contact Me" />
           <div className="overlay-purple-bottom"></div>
 
-          <div className="contacts-container">
-            {/* Left Icons */}
-            {/* Left Icons */}
-            <div className="contact-links left-links">
-              <a
-                href="#"
-                className="tooltip left"
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigator.clipboard.writeText("csoberano1210@gmail.com");
-                  setActiveTooltip("copied"); // show "Email copied!"
-                  setTimeout(() => setActiveTooltip(null), 2000); // reset after 2s
-                }}
-                onMouseEnter={() => {
-                  if (activeTooltip !== "copied") {
-                    setActiveTooltip("hover"); // show email on hover
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (activeTooltip !== "copied") {
-                    setActiveTooltip(null);
-                  }
-                }}
-              >
-                <FaEnvelope />
-                <span className="tooltiptext">
-                  {activeTooltip === "copied"
-                    ? "Email copied!"
-                    : activeTooltip === "hover"
-                    ? "csoberano1210@gmail.com"
-                    : ""}
-                </span>
-              </a>
-
-              <a
-                href="https://www.facebook.com/noelchristian.soberano.3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tooltip left"
-              >
-                <FaFacebook />
-                <span className="tooltiptext">Facebook</span>
-              </a>
+          {/* Arc of icons — each orbits out from the center pivot */}
+          <div className="arc-contacts">
+            {/* Email — far left */}
+            <div className="arc-icon" style={{ "--angle": "-75deg" }}>
+              <div className="arc-float" style={{ "--delay": "0s" }}>
+                <a
+                  href="#"
+                  className="arc-link tooltip"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigator.clipboard.writeText("csoberano1210@gmail.com");
+                    setActiveTooltip("copied");
+                    setTimeout(() => setActiveTooltip(null), 2000);
+                  }}
+                  onMouseEnter={() => activeTooltip !== "copied" && setActiveTooltip("hover")}
+                  onMouseLeave={() => activeTooltip !== "copied" && setActiveTooltip(null)}
+                >
+                  <FaEnvelope />
+                  <span className="tooltiptext">
+                    {activeTooltip === "copied"
+                      ? "Email copied!"
+                      : activeTooltip === "hover"
+                      ? "csoberano1210@gmail.com"
+                      : "Email"}
+                  </span>
+                </a>
+              </div>
             </div>
 
-            {/* Right Icons */}
-            <div className="contact-links right-links">
-              <a
-                href="https://github.com/devyanx1210"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tooltip right"
-              >
-                <FaGithub />
-                <span className="tooltiptext">GitHub</span>
-              </a>
+            {/* Facebook — left-center */}
+            <div className="arc-icon" style={{ "--angle": "-25deg" }}>
+              <div className="arc-float" style={{ "--delay": "0.6s" }}>
+                <a
+                  href="https://www.facebook.com/noelchristian.soberano.3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="arc-link tooltip"
+                >
+                  <FaFacebook />
+                  <span className="tooltiptext">Facebook</span>
+                </a>
+              </div>
+            </div>
 
-              <a
-                href="https://www.linkedin.com/in/noel-christian-soberano-9b7054383/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tooltip right"
-              >
-                <FaLinkedin />
-                <span className="tooltiptext">LinkedIn</span>
-              </a>
+            {/* GitHub — right-center */}
+            <div className="arc-icon" style={{ "--angle": "25deg" }}>
+              <div className="arc-float" style={{ "--delay": "1.2s" }}>
+                <a
+                  href="https://github.com/devyanx1210"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="arc-link tooltip"
+                >
+                  <FaGithub />
+                  <span className="tooltiptext">GitHub</span>
+                </a>
+              </div>
+            </div>
+
+            {/* LinkedIn — far right */}
+            <div className="arc-icon" style={{ "--angle": "75deg" }}>
+              <div className="arc-float" style={{ "--delay": "1.8s" }}>
+                <a
+                  href="https://www.linkedin.com/in/noel-christian-soberano-9b7054383/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="arc-link tooltip"
+                >
+                  <FaLinkedin />
+                  <span className="tooltiptext">LinkedIn</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
