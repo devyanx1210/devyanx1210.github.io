@@ -5,13 +5,15 @@ import ProjectCard from "./components/ProjectCards";
 
 import {
   FaReact, FaLinkedin, FaFacebook, FaEnvelope, FaGithub, FaFolder, FaWindows,
+  FaHtml5, FaCss3Alt,
 } from "react-icons/fa";
 
 import {
-  SiTailwindcss, SiHtml5, SiCss3, SiJavascript,
-  SiNodedotjs, SiFirebase, SiMysql, SiTypescript, SiPython, SiLinux,
-  SiMongodb,
+  SiTailwindcss, SiJavascript, SiNodedotjs, SiMysql, SiTypescript, SiPython,
+  SiLinux, SiMongodb, SiPostgresql, SiUbuntu, SiCplusplus, SiGit, SiDocker,
 } from "react-icons/si";
+
+import { DiJava } from "react-icons/di";
 
 import FadeInSection from "./FadeInSection";
 import projects from "./data/projects";
@@ -87,12 +89,8 @@ export default function Portfolio() {
   }, []);
 
   const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/resume.pdf";
-    link.download = "Ian_Soberano_Resume.pdf";
-    link.click();
+    window.open("/Resume.pdf", "_blank");
   };
-
   const [activeTooltip, setActiveTooltip] = useState(null);
   const [nameShine, setNameShine] = useState(130);
   const handleNameMouseMove = (e) => {
@@ -219,18 +217,23 @@ export default function Portfolio() {
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
           >
             {[
-              { Icon: SiHtml5, label: "HTML5", note: "Semantic markup" },
-              { Icon: SiCss3, label: "CSS3", note: "Animations & layout" },
+              { Icon: FaHtml5, label: "HTML5", note: "Semantic markup" },
+              { Icon: FaCss3Alt, label: "CSS3", note: "Animations & layout" },
               { Icon: SiJavascript, label: "JavaScript", note: "ES6+ daily driver" },
               { Icon: SiTypescript, label: "TypeScript", note: "Type-safe JS" },
               { Icon: FaReact, label: "React", note: "Primary UI framework" },
               { Icon: SiTailwindcss, label: "Tailwind CSS", note: "Utility-first CSS" },
               { Icon: SiNodedotjs, label: "Node.js", note: "Backend APIs" },
               { Icon: SiMysql, label: "MySQL", note: "Relational DBs" },
+              { Icon: SiPostgresql, label: "PostgreSQL", note: "Advanced relational DB" },
               { Icon: SiMongodb, label: "MongoDB", note: "NoSQL database" },
-              { Icon: SiPython, label: "Python", note: "Scripting & ML" },
               { Icon: SiLinux, label: "Linux", note: "Dev environment" },
-              { Icon: SiFirebase, label: "Firebase", note: "Realtime & auth" },
+              { Icon: SiGit, label: "Git", note: "Version control" },
+              { Icon: SiDocker, label: "Docker", note: "Containerization" },
+              // --- Languages grouped ---
+              { Icon: SiCplusplus, label: "C++", note: "OOP & performance" },
+              { Icon: DiJava, label: "Java", note: "OOP & enterprise" },
+              { Icon: SiPython, label: "Python", note: "Scripting & ML" },
             ].map(({ Icon, label, note }, index) => (
               <motion.div
                 key={index}
@@ -326,7 +329,7 @@ export default function Portfolio() {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/noel-christian-soberano-9b7054383/"
+                href="https://www.linkedin.com/in/noelchristiansoberano/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="contact-icon-link tooltip"

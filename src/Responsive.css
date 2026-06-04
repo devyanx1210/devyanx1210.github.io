@@ -30,8 +30,13 @@
 
 /* ── Tablets (768px – 1024px) ──────────────────────────────── */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+
   /* Hero */
   #homepage {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: left;
     padding-right: 3vw;
     min-height: 100svh;
   }
@@ -39,6 +44,7 @@
   .homepage-info {
     width: 58vw;
     gap: 1rem;
+    align-items: flex-start;
   }
 
   .homepage-info h1 {
@@ -49,15 +55,54 @@
     font-size: clamp(12px, 1.5vw, 16px);
   }
 
+  .homepage-buttons {
+    justify-content: flex-start;
+  }
+
   .profile-container {
+    position: absolute;
+    left: 0;
+    bottom: 5%;
+    height: 100%;
     width: clamp(220px, 42%, 420px);
+    border-radius: 0;
+    overflow: visible;
+    border: none;
+    box-shadow: none;
+  }
+
+  .profile-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    -webkit-mask-image:
+      linear-gradient(to right, black 52%, transparent 88%),
+      linear-gradient(to top, transparent 0%, black 22%);
+    mask-image:
+      linear-gradient(to right, black 52%, transparent 88%),
+      linear-gradient(to top, transparent 0%, black 22%);
+    -webkit-mask-composite: destination-in;
+    mask-composite: intersect;
   }
 
   /* Projects */
-  .projects-label { padding: 2rem 0 1rem; }
-  #projects { padding: 0 4% 4rem; gap: 3.5rem; }
-  .project-row { gap: 2.5rem; }
-  .laptop-screen img { height: 190px; }
+  .projects-label {
+    padding: 2rem 0 1rem;
+  }
+
+  #projects {
+    padding: 0 4% 4rem;
+    gap: 3.5rem;
+  }
+
+  .project-row {
+    gap: 2.5rem;
+  }
+
+  .laptop-screen img {
+    height: 190px;
+  }
 
   /* Skills */
   #skills {
@@ -76,7 +121,7 @@
     font-size: clamp(38px, 6vw, 65px);
   }
 
-  /* Contact arc */
+  /* Contact */
   .arc-contacts {
     --r: 220px;
   }
@@ -98,7 +143,8 @@
 }
 
 /* ── Phones (< 768px) ──────────────────────────────────────── */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 500px) {
+
   /* ── Hero ── */
   #homepage {
     flex-direction: column;
@@ -110,17 +156,14 @@
     gap: 1.5rem;
   }
 
-  /* Profile: visible circular photo stacked above text */
+  /* inside your @media screen and (max-width: 767px) block */
   .profile-container {
     position: relative;
     left: auto;
     top: auto;
-    width: clamp(120px, 38vw, 190px);
-    height: clamp(120px, 38vw, 190px);
-    border-radius: 50%;
+    width: clamp(200px, 85vw, 380px);
+    height: clamp(200px, 85vw, 380px);
     overflow: hidden;
-    border: 3px solid rgba(151, 71, 255, 0.55);
-    box-shadow: 0 0 32px rgba(151, 71, 255, 0.35);
     flex-shrink: 0;
   }
 
@@ -129,9 +172,8 @@
     height: 100%;
     object-fit: cover;
     object-position: top center;
-    opacity: 1;
-    -webkit-mask-image: none;
-    mask-image: none;
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   }
 
   .homepage-info {
@@ -167,7 +209,9 @@
     gap: 3rem;
   }
 
-  .projects-label { padding: 2.5rem 0 0.5rem; }
+  .projects-label {
+    padding: 2.5rem 0 0.5rem;
+  }
 
   .project-row {
     grid-template-columns: 1fr;
@@ -175,12 +219,48 @@
     direction: ltr !important;
   }
 
-  .device-mockup { padding-right: 40px; }
-  .laptop-screen img { height: 170px; }
-  .phone-frame { width: 58px; height: 118px; }
+  .project-cta-outline {
+    background: transparent;
+    border: 1.5px solid rgba(151, 71, 255, 0.5);
+    color: var(--accent-light);
+    box-shadow: none;
+    margin-left: 1.5rem;
+    /* add this */
+  }
 
-  .project-row-info h2 { font-size: clamp(1.2rem, 5vw, 1.6rem); }
-  .project-row-info p  { font-size: clamp(0.85rem, 3.5vw, 1rem); }
+  .project-cta-outline {
+    background: transparent;
+    border: 1.5px solid rgba(151, 71, 255, 0.5);
+    color: var(--accent-light);
+    box-shadow: none;
+  }
+
+  .project-cta-outline:hover {
+    background: rgba(151, 71, 255, 0.1);
+    border-color: var(--accent);
+    box-shadow: none;
+  }
+
+  .device-mockup {
+    padding-right: 40px;
+  }
+
+  .laptop-screen img {
+    height: 170px;
+  }
+
+  .phone-frame {
+    width: 58px;
+    height: 118px;
+  }
+
+  .project-row-info h2 {
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+  }
+
+  .project-row-info p {
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+  }
 
   /* ── Skills ── */
   #skills {
@@ -246,7 +326,98 @@
   }
 }
 
-/* ── Small phones (< 480px) ───────────────────────────────── */
+/* ── Projects fix for mid-range (500px – 767px) ── */
+@media screen and (max-width: 767px) {
+  #projects {
+    padding: 0 1.2rem 3rem;
+    gap: 3rem;
+  }
+
+  .projects-label {
+    padding: 2.5rem 0 0.5rem;
+  }
+
+  .project-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    direction: ltr !important;
+  }
+
+  .device-mockup {
+    padding-right: 40px;
+  }
+
+  .laptop-screen img {
+    height: 170px;
+  }
+
+  .phone-frame {
+    width: 58px;
+    height: 118px;
+  }
+
+  .project-row-info h2 {
+    font-size: clamp(1.2rem, 5vw, 1.6rem);
+  }
+
+  .project-row-info p {
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+  }
+}
+
+/* ── Projects fix for mid-range (500px – 767px) ── */
+@media screen and (min-width: 500px) and (max-width: 767px) {
+  .skills-container {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  #projects {
+    padding: 0 1.2rem 3rem;
+    gap: 3rem;
+  }
+
+  .projects-label {
+    padding: 2.5rem 0 0.5rem;
+  }
+
+  .project-row {
+    grid-template-columns: 1fr 1fr;
+    /* keep side by side like desktop */
+    gap: 1.5rem;
+  }
+
+  .device-mockup {
+    padding-right: clamp(60px, 8vw, 100px);
+  }
+
+  .laptop-screen {
+    height: clamp(130px, 18vw, 200px) !important;
+  }
+
+  .laptop-screen img {
+    height: clamp(130px, 18vw, 200px);
+  }
+
+  .phone-frame {
+    width: clamp(55px, 7vw, 85px);
+    height: clamp(110px, 14vw, 170px);
+  }
+
+  .project-row-info h2 {
+    font-size: clamp(1rem, 3vw, 1.4rem);
+  }
+
+  .project-row-info p {
+    font-size: clamp(0.78rem, 2vw, 0.95rem);
+  }
+
+  .project-tag {
+    font-size: 0.62rem;
+  }
+}
+
+/* ── Small phones (< 450px) ───────────────────────────────── */
 @media screen and (max-width: 479px) {
   .homepage-info h1 {
     font-size: clamp(22px, 6.5vw, 34px);
@@ -335,7 +506,7 @@
 }
 
 /* ── Landscape phones ─────────────────────────────────────── */
-@media screen and (max-width: 767px) and (orientation: landscape) {
+@media screen and (max-width: 600px) and (orientation: landscape) {
   #homepage {
     min-height: 100svh;
     padding: 1rem 2rem;
